@@ -4,15 +4,14 @@ import time
 
 from bs4 import BeautifulSoup
 import requests
-import os
 
 URL_BASE = 'https://wallhaven.cc/toplist?page='
+DOWNLOAD_PATH = "/Users/heyong/Pictures/%d.jpg"
 
 
-def request_download(IMAGE_URL, num):
-    r = requests.get(IMAGE_URL)
-    path = "/Users/heyong/Pictures/%d.jpg" % num
-    with open(path, 'wb') as f:
+def request_download(image_url, num):
+    r = requests.get(image_url)
+    with open(DOWNLOAD_PATH % num, 'wb') as f:
         f.write(r.content)
         f.close()
         print('success:%d.jpg' % num)
@@ -60,25 +59,3 @@ if __name__ == '__main__':
                 request_download(download_link, number)
                 number += 1
         i += 1
-
-    # request_download('https://w.wallhaven.cc/full/6k/wallhaven-6ky6dq.jpg', 1)
-    # get_preview_url('https://wallhaven.cc/w/oxj8zm')
-    # target = 'https://wallhaven.cc/'
-    # url1 = 'https://wallhaven.cc/toplist'
-    # url2 = 'https://wallhaven.cc/toplist?page=2'
-    # url3 = 'https://wallhaven.cc/w/oxj7mm'
-    #
-    # req = requests.get(url=url2)
-    #
-    # html = req.text
-    # texts = req.text
-    #
-    # bf = BeautifulSoup(html, 'html.parser')
-    #
-    # texts = bf.find_all('a', class_='preview')
-    # texts = bf.find_all('div', id='overlay')
-    # for link in texts:
-    #     print(link.get('href'))
-
-    # print(texts)
-    # print(texts[0].text.replace('\xa0' * 8, '\n\n'))
